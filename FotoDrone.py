@@ -1,5 +1,4 @@
 from djitellopy import tello
-from threading import Thread
 from pygame import mixer
 import TestKeyboard as kp
 import numpy as np
@@ -44,7 +43,7 @@ def findFace(img):
         myFaceListArea.append(area)
     if len(myFaceListArea) != 0:
         i = myFaceListArea.index(max(myFaceListArea))
-        cv2.imwrite(f'C:/Users/OCG/Desktop/NAVY/Foto Flight{time.time()}.jpg',img)
+        cv2.imwrite(rf'C:\Users\ocard\Desktop\test_field\ParkerDrone2.0\FlightFoto{time.time()}.jpg',cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
         return img, [myFaceListC[i],myFaceListArea[i]]
     else:
         return img, [[0,0],0]
@@ -102,6 +101,6 @@ while True:
     img, info = findFace(img)
     pError = trackFace(me,info,w,pid,pError)
     print("Area",info[1],"Center",info[0])
-    cv2.imshow("Image",img)
+    cv2.imshow("Image",cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     cv2.waitKey(1) 
 
